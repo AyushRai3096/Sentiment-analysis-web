@@ -9,7 +9,7 @@ const navbar = () => {
             </svg>
         </a>
         <a className="navbar-brand" href="/">Sentiment Analysis</a>
-        <ul className="navbar-nav ml-auto"><a className="nav-link" href="/">Github</a></ul>
+        <ul className="navbar-nav ml-auto"><a className="nav-link" href="https://github.com/AyushRai3096/">Github</a></ul>
     </nav>);
 }
 

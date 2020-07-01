@@ -2,14 +2,18 @@ import React from "react";
 
 const keywords = (props) => {
     let result = <p> Please enter some text in the text box above and click submit </p>
-    if (props.keywords) {
+    if (props.keywords && props.sentiment) {
+        let convertedSentiment = (JSON.parse(props.sentiment));
+        convertedSentiment = convertedSentiment.sentiment;
+        console.log(typeof (convertedSentiment));
         result = <div className="card-body">
-            <h5 className="card-title">Response from sentiment analysis</h5>
+            <h5 className="card-title">Response after sentiment analysis is {convertedSentiment}</h5>
             <p className="card-text">Following Keywords were found:</p>
             <ul >
-                <li style={{ listStyle: "none" }}>Item 1</li>
-                <li style={{ listStyle: "none" }}>Item 2</li>
-                <li style={{ listStyle: "none" }}>Item 3</li>
+                {props.keywords.map((keyword, index) => {
+                    return <li key={index} style={{ listStyle: "none" }}>{keyword}</li>
+                })}
+
             </ul>
 
         </div>

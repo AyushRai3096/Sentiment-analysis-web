@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import Navbar from "./components/UI/Navbar";
+import InputField from "./components/inputField/InputField";
+import Button from "./components/UI/Button";
+import Keywords from "./components/Sentiment-Result/Keywords";
+
+class App extends Component {
+
+  state = {
+    inputText: null,
+    keywords: null,
+    sentiment: null
+  }
+
+  getSentimentHandler = () => {
+    axios.post("http://localhost:8081/get-sentiment", {
+      review: this.state.inputText
+    }).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  onInputChangedHandler = (event) => {
+    this.setState({
+      inputText: event.target.value
+    });
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        <InputField changed={this.onInputChangedHandler} />
+        <Button clicked={this.getSentimentHandler} />
+        <Keywords />
+      </div>
+    );
+  }
 }
 
 export default App;

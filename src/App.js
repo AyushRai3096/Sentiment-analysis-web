@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   getSentimentHandler = () => {
-    axios.post("http://localhost:8081/get-sentiment", {
+    axios.post("https://sentimentanalysis-node-service.herokuapp.com/get-sentiment", {
       review: this.state.inputText
     }).then((response) => {
       console.log(response);
